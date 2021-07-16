@@ -37,11 +37,8 @@ class VkPhoto:
                 if name in photos["file_name"]:
                     name = f'{photo["likes"]["count"]}_{count}.jpg'
                     count += 1
-            with open(name, 'wb') as f:
+            with open(f'Photos/{name}', 'wb') as f:
                 f.write(res.content)
-            # скачивает в папку нормально, но не берет из папки при загрузке на Ядиск. пишет, что неправильный формат имени
-            # with open(f'{id}/{name}', 'wb') as f:
-            #     f.write(res.content)
             photos_list.append({"file_name": name, "size": size})
         with open('photos_list.json', 'w', encoding='utf-8') as f:
             json.dump(photos_list, f, indent=1)

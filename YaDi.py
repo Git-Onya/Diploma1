@@ -22,7 +22,6 @@ class YaUploader:
     # Загрузка файла в указанную папку на Ядиске
     def upload(self, file_path: str, filename):
         href = self.get_link(file_path=file_path).get("href", "")
-        print(href)
         response = requests.put(href, data=open(filename, 'rb'))
         response.raise_for_status()
         return response.status_code
@@ -32,7 +31,7 @@ class YaUploader:
         count = 1
         for file in files_list:
             filename = file["file_name"]
-            res = self.upload(file_path, filename)
+            res = self.upload(f'{file_path}/{filename}', f'{file_path}/{filename}')
             # Лог загрузки файлов
             if res == 201:
                 print(f'Uploaded {count} of {len(files_list)} files')
