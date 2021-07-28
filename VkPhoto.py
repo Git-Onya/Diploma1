@@ -33,11 +33,9 @@ class VkPhoto:
             name = f'{photo["likes"]["count"]}.jpg'
             res = requests.get(url)
             for photos in photos_list:
-                count = 1
                 if name in photos["file_name"]:
-                    name = f'{photo["likes"]["count"]}_{count}.jpg'
-                    count += 1
-            with open(f'Photos/{name}', 'wb') as f:
+                    name = f'{photo["likes"]["count"]}_{photo["date"]}.jpg'
+            with open(f'{id}/{name}', 'wb') as f:
                 f.write(res.content)
             photos_list.append({"file_name": name, "size": size})
         with open('photos_list.json', 'w', encoding='utf-8') as f:
